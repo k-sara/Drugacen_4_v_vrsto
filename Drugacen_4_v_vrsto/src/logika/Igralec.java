@@ -5,19 +5,11 @@ public enum Igralec {
 	BLUE;
 	
 	public Igralec nasprotnik(){
-		if (this == RED){
-			return BLUE;
-		} else {
-			return  RED;
-		}
+		return (this == RED ? BLUE : RED);
 	}
 	
 	public Polje getPolje() {
-		if (this == RED){
-			return Polje.RED;
-		} else {
-			return  Polje.BLUE;
-		}
+		return (this == RED ? Polje.RED : Polje.BLUE);
 	}
 	
 

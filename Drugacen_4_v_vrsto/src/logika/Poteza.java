@@ -1,10 +1,10 @@
 package logika;
 
-public class Poteze {
+public class Poteza {
 	private int x;
 	private int y;
 	
-	public Poteze(int x, int y){
+	public Poteza(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
