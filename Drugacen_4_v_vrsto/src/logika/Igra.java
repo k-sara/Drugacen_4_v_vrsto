@@ -23,7 +23,20 @@ public class Igra {
 		}
 		naPotezi = Igralec.RED;
 	}
+
+	/*
+	 * Metoda, ki preverja ali ima prazno polje nepraznega soseda. Èe polje ima nepraznega soseda funkcija osamljeni vrne true, sicer pa false.
+	 */
 	
+	public boolean sosedi(int x, int y) {
+		if (plosca[x][y] == Polje.PRAZNO){
+			if (plosca[x+1][y] != Polje.PRAZNO || plosca[x-1][y] != Polje.PRAZNO || plosca[x][y+1] != Polje.PRAZNO || plosca[x+1][y-1] != Polje.PRAZNO){
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
 
 	/* 
 	 * Možne poteze
@@ -33,13 +46,8 @@ public class Igra {
 		LinkedList<Poteza> seznampotez = new LinkedList<Poteza>();
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++){
-				if (plosca[i][j] == Polje.PRAZNO){
-					if (plosca[i+1][j] != Polje.PRAZNO || plosca[i-1][j] != Polje.PRAZNO || plosca[i][j+1] != Polje.PRAZNO || plosca[i+1][j-1] != Polje.PRAZNO){
-						seznampotez.add(new Poteza(i,j));
-					}
-				}
-			}
-		}
+				if sosedi
+				seznampotez.add(new Poteza(i,j));
 	return seznampotez;
 	}
 
