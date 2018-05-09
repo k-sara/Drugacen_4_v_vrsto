@@ -94,22 +94,57 @@ public class Igra {
 		return true;
 	}
 	
-	/* Stanje igre */
+	/* 
+	 * Stanje igre - preveri ali je zmagal rdeèi, modri, je neodloèeno ali pa igre še ni konec.
+	 */
 	
 	public Stanje stanje() {
 		for (Stirke s : stirke) {
-			/* Preveri èe je zmagal rdeèi */
+			/* Preveri, èe je zmagal rdeèi in èe je nastavi zmagovalno štirko. */
 			if (vse_enake(s, Polje.RED)) {
 				Stanje stanje = Stanje.ZMAGA_RED;
+				stanje.setZmagovalna(s);
+				return stanje;
+			} 
+			/* Preveri;
+			 *Preveri, èe je zmagal modri in èe je nastavi zmagovalno štirko. */
+			else if (vse_enake(s, Polje.BLUE)) {
+				Stanje stanje = Stanje.ZMAGA_BLUE;
+				stanje.setZmagovalna(s);
+				return stanje;
+				
 			}
 		}
+		/* Preverimo, èe je kakšno polje prazno, vkolikor je igre še ni konec. */
+		for (int i = 0; i < N; i++ ) {
+			for (int j = 0; j < N; j++) {
+				if (plosca[i][j] == Polje.PRAZNO) {
+					if (naPotezi == Igralec.RED) {
+						return Stanje.NA_VRSTI_RED;
+					} else {
+						return Stanje.NA_VRSTI_BLUE;
+					}
+				}
+			}
+		}
+		/* Èe ni zmagal noben igralec in so vsa polja zasedena, vrne neodloèen rezultat. */
+		return Stanje.NEODLOCENO;
 	}
 	
 	/*
-	 * Odigraj novo potezo
+	 * Odigraj novo potezo pogleda, èe je odigrana poteza ustrezna. 
+	 * Èe je vrne true in shrani polje ustreznega igralca in nastavi, da je na potezi nasprotni igralec.
+	 * Èe poteza ni ustrezna, vrne false.
 	 */
 	
 	public boolean odigrajpotezo (Poteza p) {
-		return true;
+		List<Poteza> k = poteze();
+		if ( k.contains(plosca[p.getX()][p.getY()])) {
+			plosca[p.getX()][p.getY()] = naPotezi.getPolje();
+			naPotezi = naPotezi.nasprotnik();
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

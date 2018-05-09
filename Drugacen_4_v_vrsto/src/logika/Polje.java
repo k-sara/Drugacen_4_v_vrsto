@@ -5,5 +5,4 @@ public enum Polje {
 	BLUE,
 	PRAZNO;
 	
-
 }
