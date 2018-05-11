@@ -56,7 +56,7 @@ public class Igra {
 	}
 
 	/*
-	 * Metoda, ki preverja ali ima prazno polje nepraznega soseda. Èe polje ima nepraznega soseda funkcija osamljeni vrne true, sicer pa false.
+	 * Metoda, ki preverja ali ima prazno polje nepraznega soseda. Èe polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.
 	 */
 	
 	public boolean sosedi(int x, int y) {
@@ -67,17 +67,40 @@ public class Igra {
 		}
 		return false;
 	}
+	
+	/*
+	 * Metoda, ki preveri ali so vsa polja prazna. Èe so vrne true, sicer pa false. ??? ali vrne true ko najde eno prazno polje ali èe so res vsa prazna
+	 */
+	
+	public boolean praznaPlosca() {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++){
+				if (plosca[i][j] == Polje.PRAZNO){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/* Metoda, ki izraèuna možne poteze in vrne seznam teh. */
 
 	public List<Poteza> poteze() {
 		LinkedList<Poteza> seznampotez = new LinkedList<Poteza>();
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < N; j++){
-				if (sosedi(i,j) == true){
-				seznampotez.add(new Poteza(i,j));
+		if (praznaPlosca() == true){
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++){
+					seznampotez.add(new Poteza(i,j));
 				}
 			}
+		} else {
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++){
+					if (sosedi(i,j) == true){
+						seznampotez.add(new Poteza(i,j));
+						}
+					}
+				}
 		}
 	return seznampotez;
 	}
@@ -115,7 +138,7 @@ public class Igra {
 				
 			}
 		}
-		/* Preverimo, èe je kakšno polje prazno, vkolikor je igre še ni konec. */
+		/* Preverimo, èe je kakšno polje prazno, vkolikor je, igre še ni konec. */
 		for (int i = 0; i < N; i++ ) {
 			for (int j = 0; j < N; j++) {
 				if (plosca[i][j] == Polje.PRAZNO) {
