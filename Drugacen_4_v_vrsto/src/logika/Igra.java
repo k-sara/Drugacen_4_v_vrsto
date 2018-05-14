@@ -18,7 +18,7 @@ public class Igra {
 	
 	/* Na za�etku igre (ko se prvi� po�ene igra oziroma program) se ustvari seznam vseh mo�nih �tirk.*/
 	
-	{ /*Dolo�imo mo�ne smeri �tirk*/
+	static { /*Dolo�imo mo�ne smeri �tirk*/
 		int[][] smeri = {{1,0}, {0,1}, {1,1}, {1,-1}};
 		for (int x = 0; x < N; x++) {
 			for (int y = 0; y < N; y++) {
