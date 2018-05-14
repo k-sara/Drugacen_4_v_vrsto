@@ -16,9 +16,9 @@ public class Igra {
 	
 	private static final List<Stirke> stirke = new LinkedList<Stirke>();
 	
-	/* Na zaèetku igre (ko se prviè požene igra oziroma program) se ustvari seznam vseh možnih štirk.*/
+	/* Na zaï¿½etku igre (ko se prviï¿½ poï¿½ene igra oziroma program) se ustvari seznam vseh moï¿½nih ï¿½tirk.*/
 	
-	{ /*Doloèimo možne smeri štirk*/
+	{ /*Doloï¿½imo moï¿½ne smeri ï¿½tirk*/
 		int[][] smeri = {{1,0}, {0,1}, {1,1}, {1,-1}};
 		for (int x = 0; x < N; x++) {
 			for (int y = 0; y < N; y++) {
@@ -34,7 +34,7 @@ public class Igra {
 							stirka_x[k] = x + dx*k;
 							stirka_y[k] = y + dy*k;
 						}
-						/* V seznam štirk, ki se ustvari na zaèetku, doda nove štirke.*/
+						/* V seznam ï¿½tirk, ki se ustvari na zaï¿½etku, doda nove ï¿½tirke.*/
 						stirke.add(new Stirke(stirka_x, stirka_y));
 						
 					}
@@ -43,7 +43,7 @@ public class Igra {
 		}
 	}
 	
-	/* Ustvari novo igro s praznimi polji in doloèi, da igro zaène rdeèi. */
+	/* Ustvari novo igro s praznimi polji in doloï¿½i, da igro zaï¿½ne rdeï¿½i. */
 	
 	public Igra() {
 		plosca = new Polje[N][N];
@@ -56,57 +56,58 @@ public class Igra {
 	}
 
 	/*
-	 * Metoda, ki preverja ali ima prazno polje nepraznega soseda. Èe polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.
+	 * Metoda, ki preverja ali je polje prazno in ima nepraznega soseda. ï¿½e polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.
 	 */
 	
-	public boolean sosedi(int x, int y) {
-		if (plosca[x][y] == Polje.PRAZNO){
-			if (plosca[x+1][y] != Polje.PRAZNO || plosca[x-1][y] != Polje.PRAZNO || plosca[x][y+1] != Polje.PRAZNO || plosca[x+1][y-1] != Polje.PRAZNO){
-				return true;
-			}
-		}
-		return false;
+	public boolean smemoIgrati(int x, int y) {
+		return
+		  (plosca[x][y] == Polje.PRAZNO) &&
+		  ((x < N-1 && plosca[x+1][y] != Polje.PRAZNO) ||
+		   (x > 0 && plosca[x-1][y] != Polje.PRAZNO) ||
+		   (y < N-1 && plosca[x][y+1] != Polje.PRAZNO) ||
+		   (y > 0 && plosca[x][y-1] != Polje.PRAZNO)		  
+		  );
 	}
 	
 	/*
-	 * Metoda, ki preveri ali so vsa polja prazna. Èe so vrne true, sicer pa false. ??? ali vrne true ko najde eno prazno polje ali èe so res vsa prazna
+	 * Metoda, ki preveri ali so vsa polja prazna. ï¿½e so vrne true, sicer pa false.
 	 */
 	
 	public boolean praznaPlosca() {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++){
-				if (plosca[i][j] == Polje.PRAZNO){
-					return true;
+				if (plosca[i][j] != Polje.PRAZNO){
+					return false;
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
-	/* Metoda, ki izraèuna možne poteze in vrne seznam teh. */
+	/* Metoda, ki izraï¿½una moï¿½ne poteze in vrne seznam teh. */
 
 	public List<Poteza> poteze() {
-		LinkedList<Poteza> seznampotez = new LinkedList<Poteza>();
-		if (praznaPlosca() == true){
+		LinkedList<Poteza> seznamPotez = new LinkedList<Poteza>();
+		if (praznaPlosca()){
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++){
-					seznampotez.add(new Poteza(i,j));
+					seznamPotez.add(new Poteza(i,j));
 				}
 			}
 		} else {
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++){
-					if (sosedi(i,j) == true){
-						seznampotez.add(new Poteza(i,j));
+					if (smemoIgrati(i,j)){
+						seznamPotez.add(new Poteza(i,j));
 						}
 					}
 				}
 		}
-	return seznampotez;
+		return seznamPotez;
 	}
 	
-	/* Metoda, ki preverja, èe so vsa polja štirke enaka. Torej ali so vsa rdeèa oziroma modra. 
-	 * Èe niso enaka vrne false, èe pa so vsa 4 polja enaka pa true. */
+	/* Metoda, ki preverja, ï¿½e so vsa polja ï¿½tirke enaka. Torej ali so vsa rdeï¿½a oziroma modra. 
+	 * ï¿½e niso enaka vrne false, ï¿½e pa so vsa 4 polja enaka pa true. */
 	
 	private boolean vse_enake(Stirke s, Polje p) {
 		for (int k = 0; k < 4; k++) {
@@ -118,19 +119,19 @@ public class Igra {
 	}
 	
 	/* 
-	 * Stanje igre - preveri ali je zmagal rdeèi, modri, je neodloèeno ali pa igre še ni konec.
+	 * Stanje igre - preveri ali je zmagal rdeï¿½i, modri, je neodloï¿½eno ali pa igre ï¿½e ni konec.
 	 */
 	
 	public Stanje stanje() {
 		for (Stirke s : stirke) {
-			/* Preveri, èe je zmagal rdeèi in èe je nastavi zmagovalno štirko. */
+			/* Preveri, ï¿½e je zmagal rdeï¿½i in ï¿½e je nastavi zmagovalno ï¿½tirko. */
 			if (vse_enake(s, Polje.RED)) {
 				Stanje stanje = Stanje.ZMAGA_RED;
 				stanje.setZmagovalna(s);
 				return stanje;
 			} 
 			/* Preveri;
-			 *Preveri, èe je zmagal modri in èe je nastavi zmagovalno štirko. */
+			 *Preveri, ï¿½e je zmagal modri in ï¿½e je nastavi zmagovalno ï¿½tirko. */
 			else if (vse_enake(s, Polje.BLUE)) {
 				Stanje stanje = Stanje.ZMAGA_BLUE;
 				stanje.setZmagovalna(s);
@@ -138,7 +139,7 @@ public class Igra {
 				
 			}
 		}
-		/* Preverimo, èe je kakšno polje prazno, vkolikor je, igre še ni konec. */
+		/* Preverimo, ï¿½e je kakï¿½no polje prazno, vkolikor je, igre ï¿½e ni konec. */
 		for (int i = 0; i < N; i++ ) {
 			for (int j = 0; j < N; j++) {
 				if (plosca[i][j] == Polje.PRAZNO) {
@@ -150,19 +151,19 @@ public class Igra {
 				}
 			}
 		}
-		/* Èe ni zmagal noben igralec in so vsa polja zasedena, vrne neodloèen rezultat. */
+		/* ï¿½e ni zmagal noben igralec in so vsa polja zasedena, vrne neodloï¿½en rezultat. */
 		return Stanje.NEODLOCENO;
 	}
 	
 	/*
-	 * Odigraj novo potezo pogleda, èe je odigrana poteza ustrezna. 
-	 * Èe je vrne true in shrani polje ustreznega igralca in nastavi, da je na potezi nasprotni igralec.
-	 * Èe poteza ni ustrezna, vrne false.
+	 * Odigraj novo potezo pogleda, ï¿½e je odigrana poteza ustrezna. 
+	 * ï¿½e je vrne true in shrani polje ustreznega igralca in nastavi, da je na potezi nasprotni igralec.
+	 * ï¿½e poteza ni ustrezna, vrne false.
 	 */
 	
-	public boolean odigrajpotezo (Poteza p) {
+	public boolean odigrajPotezo (Poteza p) {
 		List<Poteza> k = poteze();
-		if ( k.contains(plosca[p.getX()][p.getY()])) {
+		if (k.contains(p)) {
 			plosca[p.getX()][p.getY()] = naPotezi.getPolje();
 			naPotezi = naPotezi.nasprotnik();
 			return true;

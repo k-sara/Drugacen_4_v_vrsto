@@ -1,9 +1,10 @@
 package test;
 
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import logika.Igra;
-import logika.Polje;
 import logika.Stanje;
 import logika.Poteza;
 
@@ -11,17 +12,33 @@ public class TestLogika extends TestCase {
 	
 	public void testIgra() {
 		Igra igra = new Igra();
-		// Preveri Ëe je res na zaËetku na vrsti rdeËi.
+
+		// Preveri ÔøΩe je res na zaÔøΩetku na vrsti rdeÔøΩi.
 		assertEquals(Stanje.NA_VRSTI_RED, igra.stanje());
-		// Preveri Ëe je ploöËa res prazna.
+
+		// Preveri ÔøΩe je ploÔøΩÔøΩa res prazna.
 		assertEquals(igra.praznaPlosca(), true);
-		// Odigra potezo - NAPAKA
-		igra.odigrajpotezo(igra.poteze().get(0));
+		// Na zaƒçetku imamo na voljo N * N potez
+		List<Poteza> poteze = igra.poteze();
+		assertEquals(Igra.N * Igra.N, poteze.size());
+
+		// odigramo prvo potezo
+		igra.odigrajPotezo(poteze.get(0));
 		assertEquals(igra.praznaPlosca(), false);
-//		assertEquals(Igra.N * Igra.N, igra.poteze().size());
-//		 assertEquals(Stanje.NA_VRSTI_BLUE, igra.stanje());
-		 
-		
+
+		// preveri eno igro, v kateri zmaga modri
+		odigraj7Potez();
+	}
+	
+	public void odigraj7Potez() {
+		Igra igra = new Igra();
+		Poteza[] potekIgre = {
+				new Poteza(2,3),
+				new Poteza(2,2),
+				// Tu manjkajo ≈°e poteze, ki peljejo do zmage modrega
+		};
+		for (Poteza p : potekIgre) { igra.odigrajPotezo(p); }
+		assertEquals(Stanje.ZMAGA_BLUE, igra.stanje());
 	}
 
 }
