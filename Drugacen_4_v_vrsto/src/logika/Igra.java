@@ -11,10 +11,10 @@ public class Igra {
 	
 	/* Atributi razreda Igra. */
 	
-	private Polje[][] plosca;
+	private static Polje[][] plosca;
 	private Igralec naPotezi;
 	
-	private static final List<Stirke> stirke = new LinkedList<Stirke>();
+	public static final List<Stirke> stirke = new LinkedList<Stirke>();
 	
 	/* Na za�etku igre (ko se prvi� po�ene igra oziroma program) se ustvari seznam vseh mo�nih �tirk.*/
 	
@@ -25,7 +25,8 @@ public class Igra {
 				for (int[] smer : smeri){
 					int dx = smer[0];
 					int dy = smer[1];
-					if ((0 <= x + (N - 1)*dx) && (0 <= y + (N -1)*dy) && (x + (N - 1)*dx < N) && (y + (N -1)*dy < N)) {
+					// 3 je ker je (4 - 1)=3 
+					if ((0 <= x + 3*dx) && (0 <= y + 3*dy) && (x + 3*dx < N) && (y + 3*dy < N)) {
 						/* Ustvari novi tabeli, ena s 4 x in druga s 4 y. */
 						int[] stirka_x = new int[4];
 						int[] stirka_y = new int[4];
@@ -59,7 +60,7 @@ public class Igra {
 	 * Metoda, ki preverja ali je polje prazno in ima nepraznega soseda. �e polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.
 	 */
 	
-	public boolean smemoIgrati(int x, int y) {
+	public static boolean smemoIgrati(int x, int y) {
 		return
 		  (plosca[x][y] == Polje.PRAZNO) &&
 		  ((x < N-1 && plosca[x+1][y] != Polje.PRAZNO) ||

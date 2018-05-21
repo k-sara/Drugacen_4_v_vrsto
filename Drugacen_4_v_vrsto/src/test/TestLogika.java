@@ -28,17 +28,32 @@ public class TestLogika extends TestCase {
 
 		// preveri eno igro, v kateri zmaga modri
 		odigraj7Potez();
+		
+		//System.out.println(Igra.stirke);
+		
+		System.out.println(odigrajNapacnoPotezo());
 	}
 	
 	public void odigraj7Potez() {
 		Igra igra = new Igra();
 		Poteza[] potekIgre = {
-				new Poteza(2,3),
+				new Poteza(2,0),
+				new Poteza(2,1),
+				new Poteza(3,0),
 				new Poteza(2,2),
-				// Tu manjkajo še poteze, ki peljejo do zmage modrega
+				new Poteza(3,1),
+				new Poteza(2,3),
+				new Poteza(1,1),
+				new Poteza(2,4),
 		};
 		for (Poteza p : potekIgre) { igra.odigrajPotezo(p); }
 		assertEquals(Stanje.ZMAGA_BLUE, igra.stanje());
 	}
 
+	public boolean odigrajNapacnoPotezo() {
+		Igra igra = new Igra();
+		igra.odigrajPotezo(	new Poteza(2,0)) ; 
+		return Igra.smemoIgrati(4,4);
+	}
+	
 }
