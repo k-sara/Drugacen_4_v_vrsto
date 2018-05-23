@@ -9,14 +9,13 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import logika.Igra;
+import logika.Igralec;
 import logika.Polje;
 
 @SuppressWarnings("serial")
 public class IgralnoPolje extends JPanel implements MouseListener{
 	
 	public GlavnoOkno master;
-	
-	private final static double ŠIRINA_ÈRTE = 0.1;
 	
 	public IgralnoPolje (GlavnoOkno master) {
 		setBackground(Color.white);
@@ -34,9 +33,10 @@ public class IgralnoPolje extends JPanel implements MouseListener{
 		return (Math.min(getWidth(), getHeight()) - 40) / Igra.N;
 	}
 	
+	// Èe je polje od rdeèega, ga pobarva rdeèe in obratno.
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Polje[][] p = master.igra.plosca ;
+		Polje[][] p = master.igra.plosca;
 		int a = stranicaKvadrata();
 		for (int i = 0; i < Igra.N; i++) {
 			for (int j = 0; j < Igra.N;j++) {
@@ -61,8 +61,7 @@ public class IgralnoPolje extends JPanel implements MouseListener{
 		int i = (y - 20)/a ;
 		int j = (x - 20)/a ;
 		if (y < 20 || i >= Igra.N || x < 20 || j >= Igra.N) return ;
-		Polje[][] p = master.igra.plosca ;
-		p[i][j] = Polje.RED;
+		master.klikniPolje(i, j);
 		repaint();
 		
 	}
