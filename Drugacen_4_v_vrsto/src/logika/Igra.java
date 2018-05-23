@@ -55,6 +55,16 @@ public class Igra {
 		}
 		naPotezi = Igralec.RED;
 	}
+	
+	public Igra(Igra igra) {
+		plosca = new Polje[N][N];
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				plosca[i][j] = igra.plosca[i][j];
+			}
+		}
+		this.naPotezi = igra.naPotezi;
+	}
 
 	/*
 	 * Metoda, ki preverja ali je polje prazno in ima nepraznega soseda. �e polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.

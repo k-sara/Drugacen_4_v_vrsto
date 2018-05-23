@@ -4,20 +4,22 @@ import javax.swing.SwingWorker;
 
 import logika.Igralec;
 import logika.Poteza;
+import inteligenca.Nakljucno;
 
 public class Racunalnik extends Strateg {
 	private GlavnoOkno master;
-	private Igralec jaz;
 	private SwingWorker<Poteza, Object> mislec;
+	private boolean prenehaj;
 	
 	public Racunalnik(GlavnoOkno master, Igralec jaz) {
 		super();
 		this.master = master;
-		this.jaz = jaz;
 	}
+	
 	@Override
 	public void na_potezi() {
-		// TODO Auto-generated method stub
+		mislec = new Nakljucno(master);
+		
 		
 	}
 	@Override
@@ -29,7 +31,6 @@ public class Racunalnik extends Strateg {
 	}
 	@Override
 	public void klik(int i, int j) {
-		// TODO Auto-generated method stub
 		
 	}
 	
