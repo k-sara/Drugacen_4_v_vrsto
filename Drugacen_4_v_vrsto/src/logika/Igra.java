@@ -11,7 +11,7 @@ public class Igra {
 	
 	/* Atributi razreda Igra. */
 	
-	private static Polje[][] plosca;
+	public static Polje[][] plosca;
 	private Igralec naPotezi;
 	
 	public static final List<Stirke> stirke = new LinkedList<Stirke>();
