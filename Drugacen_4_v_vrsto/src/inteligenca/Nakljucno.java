@@ -12,30 +12,36 @@ import logika.Poteza;
 public class Nakljucno extends SwingWorker<Poteza, Object> {
 	
 	private GlavnoOkno master;
+	Random r;
 
 	public Nakljucno(GlavnoOkno master) {
 		super();
 		this.master = master;
+		r = new Random();
 	}
 
+	//Ta metoda se izvede v ozadju in nakljuèno izbere eno potezo iz seznama možnih potez.
+	
 	@Override
 	protected Poteza doInBackground() throws Exception {
-		Igra igra = master.kopijaIgre();
-		Random r = new Random();
+		Igra igra = master.kopijaIgre();		
 		List<Poteza> poteze = igra.poteze();
-		Poteza p = poteze.get(r.nextInt(poteze.size()));
-		return p;
+		int x = r.nextInt(poteze.size());
+		Poteza poteza = poteze.get(x);
+		return poteza;
 	}
 
+	//Ko konèa prejšnja metoda, ta metoda odigra nakljuèno izbrano potezo.
+	
 	@Override
 	protected void done() {
 		try {
-			Poteza p = this.get();
-			if (p != null) {
-				master.odigraj(p);
+			Poteza poteza = this.get();
+			if (poteza != null) {
+				master.odigraj(poteza);
 			}
 		} catch (Exception e) {
-		}
+		}	
 		super.done();
 	}
 

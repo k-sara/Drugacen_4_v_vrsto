@@ -16,9 +16,12 @@ public class Racunalnik extends Strateg {
 		this.master = master;
 	}
 	
+	
 	@Override
 	public void na_potezi() {
 		mislec = new Nakljucno(master);
+		// Zažene swingworkerja
+		mislec.execute();
 		
 		
 	}

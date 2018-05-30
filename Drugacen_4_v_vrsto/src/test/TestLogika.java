@@ -53,7 +53,7 @@ public class TestLogika extends TestCase {
 	public boolean odigrajNapacnoPotezo() {
 		Igra igra = new Igra();
 		igra.odigrajPotezo(	new Poteza(2,0)) ; 
-		return Igra.smemoIgrati(4,4);
+		return igra.smemoIgrati(4,4);
 	}
 	
 }

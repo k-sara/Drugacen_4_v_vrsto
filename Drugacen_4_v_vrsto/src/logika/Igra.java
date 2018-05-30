@@ -11,7 +11,7 @@ public class Igra {
 	
 	/* Atributi razreda Igra. */
 	
-	public static Polje[][] plosca;
+	public Polje[][] plosca;
 	public Igralec naPotezi;
 	
 	public static final List<Stirke> stirke = new LinkedList<Stirke>();
@@ -70,7 +70,7 @@ public class Igra {
 	 * Metoda, ki preverja ali je polje prazno in ima nepraznega soseda. �e polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.
 	 */
 	
-	public static boolean smemoIgrati(int x, int y) {
+	public boolean smemoIgrati(int x, int y) {
 		return
 		  (plosca[x][y] == Polje.PRAZNO) &&
 		  ((x < N-1 && plosca[x+1][y] != Polje.PRAZNO) ||
