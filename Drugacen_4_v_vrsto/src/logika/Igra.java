@@ -65,6 +65,10 @@ public class Igra {
 		}
 		this.naPotezi = igra.naPotezi;
 	}
+	
+	public Polje[][] getPlosca() {
+		return plosca;
+}
 
 	/*
 	 * Metoda, ki preverja ali je polje prazno in ima nepraznega soseda. �e polje ima nepraznega soseda funkcija sosedi vrne true, sicer pa false.

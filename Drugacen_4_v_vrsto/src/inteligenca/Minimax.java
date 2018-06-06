@@ -1,20 +1,22 @@
 
 package inteligenca;
 
+import java.util.LinkedList;
+import java.util.Random;
+
 import javax.swing.SwingWorker;
 
 import gui.GlavnoOkno;
 import logika.Igra;
 import logika.Igralec;
 import logika.Poteza;
-import logika.Stanje;
 
 public class Minimax extends SwingWorker<Poteza, Object>{
 	
 	private GlavnoOkno master;
-	//NajveËja moûna globina
+	//Najveƒçja moƒçna globina
 	private int globina;
-	//Kdo je rdeËi in kdo modri
+	//Kdo je rdeƒçi in kdo modri
 	private Igralec jaz;
 
 	public Minimax(GlavnoOkno master, int globina, Igralec jaz) {
@@ -32,60 +34,78 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 		return p.poteza;
 	}
 	
+	
+	@Override
+	protected void done() {
+		try {
+			Poteza p = this.get();
+			if (p != null) { master.odigraj(p); }
+		} catch (Exception e) {
+		}
+		super.done();
+	}
+
 	// k je trenutna globina
 	
 	private OcenjenaPoteza minimax(int k, Igra igra) {
 		//Igralca na potezi nastavimo na null
 		Igralec naPotezi = null;
-		//Ugotovimo kaköno je stanje igre (kdo je na potezi/kdo je zmagal/neodloËeno)
+		//Ugotovimo kak≈°no je stanje igre (kdo je na potezi/kdo je zmagal/neodloƒçeno)
 		switch(igra.stanje()) {
-		//»e je na vrsti eden izmed igralcev, igre öe ni konec.
+		//ƒåe je na vrsti eden izmed igralcev, igre ≈°e ni konec.
 		case NA_VRSTI_RED: naPotezi = Igralec.RED; break;
 		case NA_VRSTI_BLUE: naPotezi = Igralec.BLUE; break;
-		//»e je zmagal eden izmed igralcev, je igre konec, zato ni veË moûnih potez. Vrnemo vrednost pozicije.
+		//ƒåe je zmagal eden izmed igralcev, je igre konec, zato ni ve≈° moƒçnih potez. Vrnemo vrednost pozicije.
 		case ZMAGA_RED: 
 			return new OcenjenaPoteza(null, (jaz == Igralec.RED ? Ocena.ZMAGA : Ocena.ZGUBA));
 		case ZMAGA_BLUE: 
 			return new OcenjenaPoteza(null, (jaz == Igralec.BLUE ? Ocena.ZMAGA : Ocena.ZGUBA));
-		//»e je igre konec in je rezultat neodloËen, ni veË moûnih potez. Vrnemo vrednost pozicije.
+		//≈†e je igre konec in je rezultat neodloƒçen, ni veƒç moƒçnih potez. Vrnemo vrednost pozicije.
 		case NEODLOCENO: 
 			return new OcenjenaPoteza(null, Ocena.NEODLOCENO);
 		}
-		//Poteza ne sme biti null, vkolikr je se program ustavi.
+		//Poteza ne sme biti null, vkolikor je se program ustavi.
 		assert (naPotezi != null);
-		//»e igre ni konec, je nekdo na potezi in moramo ugotoviti kako ugodno igrati naprej.
+		//ƒåe igre ni konec, je nekdo na potezi in moramo ugotoviti kako ugodno igrati naprej.
 		if (k <= globina) {
 			/*
-			 * »e pridemo Ëez maksimalno globino ni okej - ne smemo veË pregledovati.
-			 * Zato vkolikor k ne presega maksimalne globine, vrnemo do sedaj najboljöo 
+			 * ƒåe pridemo ƒçez maksimalno globino ni okej - ne smemo veƒç pregledovati.
+			 * Zato vkolikor k ne presega maksimalne globine, vrnemo do sedaj najbolj≈°o 
 			 * predvideno potezo in njeno oceno.
 			 */
 			
 			return new OcenjenaPoteza(null, Ocena.oceniPozicijo(jaz, igra));
 		}
-		// V spremenjlivki shranimo najboljöo potezo in oceno, ki sta na zaËetku nastavljenji na null in 0.
+		// V spremenjlivki shranimo najbolj≈°o potezo in oceno, ki sta na zaƒçetku nastavljenji na null in 0.
 		
-		//? morda boljöe imeti seznam najboljöih potez in potem nakljuËno izbrati eno (vse imajo enako oceno)
-		Poteza najboljsa = null;
 		int ocenaNajboljse = 0;
-		// S for zanko se zapeljemo Ëez vse moûne poteze in vrnemo najboljöo potezo in oceno.
+		//Seznam, v katerega shranjujemo najbolj≈°e poteze z enako oceno
+		LinkedList<Poteza> najboljse = new LinkedList<Poteza>();
+		// S for zanko se zapeljemo ƒçez vse mo≈æne poteze in vrnemo najbolj≈°o potezo in oceno.
 		for (Poteza p : igra.poteze()) {
-			//Ustvarimo kopijo igre, da ne povozimo obstojeËe igre.
+			//Ustvarimo kopijo igre, da ne povozimo obstojeƒçe igre.
 			Igra kopijaIgre = new Igra(igra);
 			//Odigramo potezo v kopiji igre
 			kopijaIgre.odigrajPotezo(p);
-			//PokliËemo minimax na kopijo igre in globino poveËamo za ena in ûelimo vrednost
-			int OcenaPoteze = minimax(k+1, kopijaIgre).vrednost;
-			// »e najboljöe poteze öe ni ali Ëe smo naöli boljöo jo shranimo kot najboljöo
-			if (najboljsa == null 
-					|| (naPotezi == jaz && OcenaPoteze > ocenaNajboljse) 
-					|| (naPotezi != jaz && OcenaPoteze < ocenaNajboljse)) {
-				najboljsa = p;
-				ocenaNajboljse = OcenaPoteze;
+			//Pokliƒçemo minimax na kopijo igre in globino poveƒçamo za ena in ≈æelimo vrednost
+			int ocenaPoteze = minimax(k+1, kopijaIgre).vrednost;
+			// ƒåe najbolj≈°e poteze ≈°e ni ali ƒçe smo na≈°li bolj≈°o jo shranimo kot najbolj≈°o
+			if (najboljse.size() == 0 
+					|| (naPotezi == jaz && ocenaPoteze >= ocenaNajboljse) 
+					|| (naPotezi != jaz && ocenaPoteze <= ocenaNajboljse)) {
+				if (ocenaPoteze != ocenaNajboljse){
+					najboljse.clear();
+					ocenaNajboljse = ocenaPoteze;
+				}
+				najboljse.add(p);
 			}
-			
-			
 		}
+		//
+		assert (najboljse.size() != 0);
+		Random r = new Random();
+		int x = r.nextInt(najboljse.size());
+		Poteza izbranaNajboljsa = najboljse.get(x);
+		return new OcenjenaPoteza(izbranaNajboljsa,ocenaNajboljse);
 	}
 	
 }
