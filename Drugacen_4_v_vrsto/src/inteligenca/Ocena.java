@@ -27,17 +27,18 @@ public class Ocena {
 	public static int oceniPozicijo(Igralec jaz, Igra igra) {
 		Igralec naPotezi = null;
 		switch (igra.stanje()){
-		case ZMAGA_RED:
-			return (jaz == Igralec.RED ? ZMAGA : ZGUBA);
-		case ZMAGA_BLUE:
-			return (jaz == Igralec.BLUE ? ZMAGA : ZGUBA);
-		case NEODLOCENO:
-			return NEODLOCENO;
-		case NA_VRSTI_RED:
-			naPotezi = Igralec.RED;
-		case NA_VRSTI_BLUE:
-			naPotezi = Igralec.BLUE;
+			case ZMAGA_RED:
+				return (jaz == Igralec.RED ? ZMAGA : ZGUBA);
+			case ZMAGA_BLUE:
+				return (jaz == Igralec.BLUE ? ZMAGA : ZGUBA);
+			case NEODLOCENO:
+				return NEODLOCENO;
+			case NA_VRSTI_RED:
+				naPotezi = Igralec.RED;
+			case NA_VRSTI_BLUE:
+				naPotezi = Igralec.BLUE;
 		}
+		
 		//Preštejemo število štirk vsakega igralca
 		Polje[][] plosca = igra.getPlosca();
 		int vrednostRED = 0;
@@ -56,8 +57,6 @@ public class Ocena {
 			if (poljaRED == 0 && poljaBLUE > 0) { vrednostBLUE += vrednostStirke(poljaBLUE); }
 			if (poljaBLUE == 0 && poljaRED > 0) { vrednostRED += vrednostStirke(poljaRED); }
 		}
-		//if (naPotezi == Igralec.BLUE) { vrednostRED /= 4; }
-		//if (naPotezi == Igralec.RED) { vrednostBLUE /= 4; }
 		return (jaz == Igralec.BLUE ? vrednostBLUE - vrednostRED : vrednostRED - vrednostBLUE);
 	}
 }

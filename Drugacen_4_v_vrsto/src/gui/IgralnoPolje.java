@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 
 import logika.Igra;
-import logika.Igralec;
 import logika.Polje;
 
 @SuppressWarnings("serial")
@@ -35,7 +34,7 @@ public class IgralnoPolje extends JPanel implements MouseListener{
 		return (Math.min(getWidth(), getHeight()) - 40) / Igra.N;
 	}
 	
-	// �e je polje od rde�ega, ga pobarva rde�e in obratno.
+	// Še je polje od rdečega, ga pobarva rdeče in obratno.
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;

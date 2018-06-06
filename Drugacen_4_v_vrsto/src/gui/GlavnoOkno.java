@@ -34,6 +34,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private JMenuItem igraClovekRacunalnik;
 	private JMenuItem igraRacunalnikClovek;
 	private JMenuItem igraRacunalnikRacunalnik;
+	private JMenuItem tezavnost1;
+	private JMenuItem tezavnost2;
+	private JMenuItem tezavnost3;
 	
 	//Ustvari glavno okno.
 	public GlavnoOkno() {
@@ -48,9 +51,12 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		menu_bar.add(igra_menu);
 		
 
-		igraClovekRacunalnik = new JMenuItem("Človek - računalnik");
+		JMenu igraClovekRacunalnik = new JMenu("Človek - računalnik");
 		igra_menu.add(igraClovekRacunalnik);
 		igraClovekRacunalnik.addActionListener(this);
+		
+		JMenu tezavnost_menu = new JMenu("Težavnost");
+		igraClovekRacunalnik.add(tezavnost_menu);
 		
 		igraRacunalnikClovek = new JMenuItem("Računalnik - človek");
 		igra_menu.add(igraRacunalnikClovek);
@@ -63,6 +69,18 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		igraClovekClovek = new JMenuItem("Človek - človek");
 		igra_menu.add(igraClovekClovek);
 		igraClovekClovek.addActionListener(this);
+		
+		tezavnost1 = new JMenuItem("Lahka");
+		tezavnost_menu.add(tezavnost1);
+		tezavnost1.addActionListener(this);
+		
+		tezavnost2 = new JMenuItem("Srednja");
+		tezavnost_menu.add(tezavnost2);
+		tezavnost2.addActionListener(this);
+		
+		tezavnost3 = new JMenuItem("Težka");
+		tezavnost_menu.add(tezavnost3);
+		tezavnost3.addActionListener(this);
 
 		//Definiraj igralno polje
 		polje = new IgralnoPolje(this);
@@ -83,8 +101,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		status_layout.anchor = GridBagConstraints.CENTER;
 		getContentPane().add(status, status_layout);
 		
-		//Začnemo novo igro človeka proti računalniku
-		novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
+		//Začnemo novo igro človeka proti človeku
+		novaIgra(new Clovek(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
 }
 	
 		public Polje[][] getPlosca() {
