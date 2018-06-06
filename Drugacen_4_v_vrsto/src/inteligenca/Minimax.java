@@ -14,7 +14,7 @@ import logika.Poteza;
 public class Minimax extends SwingWorker<Poteza, Object>{
 	
 	private GlavnoOkno master;
-	//Največja močna globina
+	//Največja možna globina
 	private int globina;
 	//Kdo je rdeči in kdo modri
 	private Igralec jaz;
@@ -29,7 +29,7 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 	@Override
 	protected Poteza doInBackground() throws Exception {
 		Igra igra = master.kopijaIgre();
-		OcenjenaPoteza p = minimax(0, igra);
+		OcenjenaPoteza p = minimax(2, igra);
 		assert (p.poteza != null);
 		return p.poteza;
 	}
@@ -48,7 +48,6 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 	// k je trenutna globina
 	
 	private OcenjenaPoteza minimax(int k, Igra igra) {
-		//Igralca na potezi nastavimo na null
 		Igralec naPotezi = null;
 		//Ugotovimo kakšno je stanje igre (kdo je na potezi/kdo je zmagal/neodločeno)
 		switch(igra.stanje()) {

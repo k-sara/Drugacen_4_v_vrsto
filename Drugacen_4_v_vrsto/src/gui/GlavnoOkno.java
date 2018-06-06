@@ -14,6 +14,7 @@ import javax.swing.JMenuItem;
 
 import logika.Igra;
 import logika.Igralec;
+import logika.Polje;
 import logika.Poteza;
 
 
@@ -35,7 +36,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	
 	//Ustvari glavno okno.
 	public GlavnoOkno() {
-		this.setTitle("Drugaèen 4-v-vrsto");
+		this.setTitle("DrugaÄen 4-v-vrsto");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new GridBagLayout());
 		
@@ -46,19 +47,19 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		menu_bar.add(igra_menu);
 		
 
-		igraClovekRacunalnik = new JMenuItem("Èlovek – raèunalnik");
+		igraClovekRacunalnik = new JMenuItem("ÄŒlovek - raÄunalnik");
 		igra_menu.add(igraClovekRacunalnik);
 		igraClovekRacunalnik.addActionListener(this);
 		
-		igraRacunalnikClovek = new JMenuItem("Raèunalnik – èlovek");
+		igraRacunalnikClovek = new JMenuItem("RaÄunalnik - Älovek");
 		igra_menu.add(igraRacunalnikClovek);
 		igraRacunalnikClovek.addActionListener(this);
 
-		igraRacunalnikRacunalnik = new JMenuItem("Raèunalnik – raèunalnik");
+		igraRacunalnikRacunalnik = new JMenuItem("RaÄunalnik - raÄunalnik");
 		igra_menu.add(igraRacunalnikRacunalnik);
 		igraRacunalnikRacunalnik.addActionListener(this);
 
-		igraClovekClovek = new JMenuItem("Èlovek – èlovek");
+		igraClovekClovek = new JMenuItem("ÄŒlovek - Älovek");
 		igra_menu.add(igraClovekClovek);
 		igraClovekClovek.addActionListener(this);
 
@@ -81,10 +82,13 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		status_layout.anchor = GridBagConstraints.CENTER;
 		getContentPane().add(status, status_layout);
 		
-		//Zaènemo novo igro èloveka proti raèunalniku
+		//ZaÄnemo novo igro Äloveka proti raÄunalniku
 		novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
-		
 }
+	
+		public Polje[][] getPlosca() {
+			return (igra == null ? null : igra.getPlosca());
+		}
 	
 	private void novaIgra(Strateg noviStrategRED, Strateg noviStrategBLUE) {
 		//Prekinemo stare stratege
@@ -122,11 +126,11 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		}
 		else {
 			switch(igra.stanje()) {
-			case NA_VRSTI_RED: status.setText("Na potezi je rdeèi"); break;
+			case NA_VRSTI_RED: status.setText("Na potezi je rdeÄi"); break;
 			case NA_VRSTI_BLUE: status.setText("Na potezi je modri"); break;
-			case ZMAGA_RED: status.setText("Zmagal je rdeèi"); break;
+			case ZMAGA_RED: status.setText("Zmagal je rdeÄi"); break;
 			case ZMAGA_BLUE: status.setText("Zmagal je modri"); break;
-			case NEODLOCENO: status.setText("Neodloèeno!"); break;
+			case NEODLOCENO: status.setText("NeodloÄeno!"); break;
 			}
 		}
 		polje.repaint();
@@ -134,7 +138,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 
 	
 	
-	//Glede na to kdo igra proti komu, nastavi karteri igralec je rdeèi in katreri je modri.
+	//Glede na to kdo igra proti komu, nastavi karteri igralec je rdeÄi in katreri je modri.
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == igraClovekRacunalnik) {
