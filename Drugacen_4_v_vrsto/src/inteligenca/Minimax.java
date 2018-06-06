@@ -29,8 +29,9 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 	@Override
 	protected Poteza doInBackground() throws Exception {
 		Igra igra = master.kopijaIgre();
-		OcenjenaPoteza p = minimax(2, igra);
+		OcenjenaPoteza p = minimax(0, igra);
 		assert (p.poteza != null);
+		//System.out.println("minimax: " + p);
 		return p.poteza;
 	}
 	
@@ -75,8 +76,8 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 			
 			return new OcenjenaPoteza(null, Ocena.oceniPozicijo(jaz, igra));
 		}
-		// V spremenjlivki shranimo najboljšo potezo in oceno, ki sta na začetku nastavljenji na null in 0.
 		
+		// V spremenjlivki shranimo najboljšo potezo in oceno, ki sta na začetku nastavljenji na null in 0.
 		int ocenaNajboljse = 0;
 		//Seznam, v katerega shranjujemo najboljše poteze z enako oceno
 		LinkedList<Poteza> najboljse = new LinkedList<Poteza>();
@@ -99,11 +100,12 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 				najboljse.add(p);
 			}
 		}
-		//
+		System.out.println(najboljse);
 		assert (najboljse.size() != 0);
 		Random r = new Random();
 		int x = r.nextInt(najboljse.size());
 		Poteza izbranaNajboljsa = najboljse.get(x);
+		
 		return new OcenjenaPoteza(izbranaNajboljsa,ocenaNajboljse);
 	}
 	

@@ -21,13 +21,12 @@ public class Racunalnik extends Strateg {
 		mislec = new Minimax(master, 3 , jaz);
 		// Zažene swingworkerja
 		mislec.execute();
-		
-		
 	}
+	
 	@Override
 	public void prenehaj() {
 		if (mislec != null ) {
-			mislec.cancel(true);
+			mislec.cancel(true);		
 		}
 		
 	}
