@@ -13,6 +13,7 @@ public class Igra {
 	
 	public Polje[][] plosca;
 	public Igralec naPotezi;
+	public Stirke crta;
 	
 	public static final List<Stirke> stirke = new LinkedList<Stirke>();
 	
@@ -54,6 +55,7 @@ public class Igra {
 			}
 		}
 		naPotezi = Igralec.RED;
+		crta = null;
 	}
 	
 	public Igra(Igra igra) {
@@ -64,6 +66,7 @@ public class Igra {
 			}
 		}
 		this.naPotezi = igra.naPotezi;
+		this.crta = igra.crta;
 	}
 	
 	public Polje[][] getPlosca() {

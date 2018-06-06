@@ -16,6 +16,7 @@ import logika.Igra;
 import logika.Igralec;
 import logika.Polje;
 import logika.Poteza;
+import logika.Stanje;
 
 
 
@@ -110,15 +111,16 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		
 	public void odigraj(Poteza p) {
 		igra.odigrajPotezo(p);
-		osveziGUI();
-		switch (igra.stanje()) {
-		case NA_VRSTI_RED: strategRED.na_potezi(); break;
-		case NA_VRSTI_BLUE: strategBLUE.na_potezi(); break;
-		case ZMAGA_RED: break;
-		case ZMAGA_BLUE: break;
-		case NEODLOCENO: break;
-			}
+		Stanje s = igra.stanje();
+		switch (s) {
+			case NA_VRSTI_RED: strategRED.na_potezi(); break;
+			case NA_VRSTI_BLUE: strategBLUE.na_potezi(); break;
+			case ZMAGA_RED: igra.crta = s.getZmagovalna(); break;
+			case ZMAGA_BLUE: igra.crta = s.getZmagovalna(); break;
+			case NEODLOCENO: break;
 		}
+		osveziGUI();
+	}
 		
 	public void osveziGUI() {
 		if (igra == null) {
@@ -126,11 +128,11 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		}
 		else {
 			switch(igra.stanje()) {
-			case NA_VRSTI_RED: status.setText("Na potezi je rdeči"); break;
-			case NA_VRSTI_BLUE: status.setText("Na potezi je modri"); break;
-			case ZMAGA_RED: status.setText("Zmagal je rdeči"); break;
-			case ZMAGA_BLUE: status.setText("Zmagal je modri"); break;
-			case NEODLOCENO: status.setText("Neodločeno!"); break;
+				case NA_VRSTI_RED: status.setText("Na potezi je rdeči"); break;
+				case NA_VRSTI_BLUE: status.setText("Na potezi je modri"); break;
+				case ZMAGA_RED: status.setText("Zmagal je rdeči"); break;
+				case ZMAGA_BLUE: status.setText("Zmagal je modri"); break;
+				case NEODLOCENO: status.setText("Neodločeno!"); break;
 			}
 		}
 		polje.repaint();

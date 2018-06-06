@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -33,9 +35,10 @@ public class IgralnoPolje extends JPanel implements MouseListener{
 		return (Math.min(getWidth(), getHeight()) - 40) / Igra.N;
 	}
 	
-	// Èe je polje od rdeèega, ga pobarva rdeèe in obratno.
+	// ï¿½e je polje od rdeï¿½ega, ga pobarva rdeï¿½e in obratno.
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		Polje[][] p = master.igra.plosca;
 		int a = stranicaKvadrata();
 		for (int i = 0; i < Igra.N; i++) {
@@ -44,12 +47,21 @@ public class IgralnoPolje extends JPanel implements MouseListener{
 				if (p[i][j] == Polje.RED) c = Color.RED;
 				else if (p[i][j] == Polje.BLUE) c = Color.BLUE;
 				if (c != null) {
-					g.setColor(c);
-					g.fillRect(j*a + 20 , i*a + 20, a, a);
+					g2.setColor(c);
+					g2.fillRect(j*a + 20 , i*a + 20, a, a);
 				}
-				g.setColor(Color.BLACK);
-				g.drawRect(j*a + 20 , i*a + 20, a, a);
+				g2.setColor(Color.BLACK);
+				g2.drawRect(j*a + 20 , i*a + 20, a, a);
 			}
+		}
+		if (master.igra.crta != null) {
+			g2.setStroke(new BasicStroke(20, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+			g.setColor(Color.YELLOW);
+			int x1 = master.igra.crta.y[0]*a + 20 + a/2;
+			int y1 = master.igra.crta.x[0]*a + 20 + a/2;
+			int x2 = master.igra.crta.y[3]*a + 20 + a/2;
+			int y2 = master.igra.crta.x[3]*a + 20 + a/2;
+			g.drawLine(x1, y1, x2, y2);
 		}
 	}
 	
