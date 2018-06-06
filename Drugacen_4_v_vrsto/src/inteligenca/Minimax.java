@@ -67,7 +67,7 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 		//Poteza ne sme biti null, vkolikor je se program ustavi.
 		assert (naPotezi != null);
 		//Če igre ni konec, je nekdo na potezi in moramo ugotoviti kako ugodno igrati naprej.
-		if (k <= globina) {
+		if (k >= globina) {
 			/*
 			 * Če pridemo čez maksimalno globino ni okej - ne smemo več pregledovati.
 			 * Zato vkolikor k ne presega maksimalne globine, vrnemo do sedaj najboljšo 
@@ -100,7 +100,7 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 				najboljse.add(p);
 			}
 		}
-		System.out.println(najboljse);
+		//System.out.println(najboljse);
 		assert (najboljse.size() != 0);
 		Random r = new Random();
 		int x = r.nextInt(najboljse.size());

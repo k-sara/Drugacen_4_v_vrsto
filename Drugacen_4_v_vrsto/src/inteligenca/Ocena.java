@@ -13,7 +13,7 @@ public class Ocena {
 	
 	//Vrednosti zmage, zgube ali neodločenega rezultata.
 	
-	public static final int ZMAGA = 400;
+	public static final int ZMAGA = (1 << 20);
 	public static final int ZGUBA = -ZMAGA;
 	public static final int NEODLOCENO = 0;
 	
@@ -21,7 +21,7 @@ public class Ocena {
 	//Koliko je vredna stirka, ki ima k zasedenih polj enega igralca 
 	public static int vrednostStirke(int k) {
 		assert (k < 4);
-		return (100*k);
+		return (ZMAGA >> (4* (4 - k)));
 	}
 	
 	public static int oceniPozicijo(Igralec jaz, Igra igra) {
@@ -56,8 +56,8 @@ public class Ocena {
 			if (poljaRED == 0 && poljaBLUE > 0) { vrednostBLUE += vrednostStirke(poljaBLUE); }
 			if (poljaBLUE == 0 && poljaRED > 0) { vrednostRED += vrednostStirke(poljaRED); }
 		}
-		if (naPotezi == Igralec.BLUE) { vrednostRED /= 2; }
-		if (naPotezi == Igralec.RED) { vrednostBLUE /= 2; }
+		//if (naPotezi == Igralec.BLUE) { vrednostRED /= 4; }
+		//if (naPotezi == Igralec.RED) { vrednostBLUE /= 4; }
 		return (jaz == Igralec.BLUE ? vrednostBLUE - vrednostRED : vrednostRED - vrednostBLUE);
 	}
 }
