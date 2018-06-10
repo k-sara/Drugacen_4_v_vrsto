@@ -29,6 +29,8 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private Strateg strategRED;
 	private Strateg strategBLUE;
 	
+	public int tezavnost;
+	
 	//Meni - izbire
 	private JMenuItem igraClovekClovek;
 	private JMenuItem igraClovekRacunalnik;
@@ -37,6 +39,9 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	private JMenuItem tezavnost1;
 	private JMenuItem tezavnost2;
 	private JMenuItem tezavnost3;
+	private JMenuItem tezavnost1b;
+	private JMenuItem tezavnost2b;
+	private JMenuItem tezavnost3b;
 	
 	//Ustvari glavno okno.
 	public GlavnoOkno() {
@@ -55,10 +60,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		igra_menu.add(igraClovekRacunalnik);
 		igraClovekRacunalnik.addActionListener(this);
 		
-		JMenu tezavnost_menu = new JMenu("Težavnost");
-		igraClovekRacunalnik.add(tezavnost_menu);
-		
-		igraRacunalnikClovek = new JMenuItem("Računalnik - človek");
+		JMenu igraRacunalnikClovek = new JMenu("Računalnik - človek");
 		igra_menu.add(igraRacunalnikClovek);
 		igraRacunalnikClovek.addActionListener(this);
 
@@ -71,16 +73,30 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 		igraClovekClovek.addActionListener(this);
 		
 		tezavnost1 = new JMenuItem("Lahka");
-		tezavnost_menu.add(tezavnost1);
+		igraClovekRacunalnik.add(tezavnost1);
 		tezavnost1.addActionListener(this);
 		
 		tezavnost2 = new JMenuItem("Srednja");
-		tezavnost_menu.add(tezavnost2);
+		igraClovekRacunalnik.add(tezavnost2);
 		tezavnost2.addActionListener(this);
 		
 		tezavnost3 = new JMenuItem("Težka");
-		tezavnost_menu.add(tezavnost3);
+		igraClovekRacunalnik.add(tezavnost3);
 		tezavnost3.addActionListener(this);
+		
+		tezavnost1b = new JMenuItem("Lahka");
+		igraRacunalnikClovek.add(tezavnost1b);
+		tezavnost1b.addActionListener(this);
+		
+		tezavnost2b = new JMenuItem("Srednja");
+		igraRacunalnikClovek.add(tezavnost2b);
+		tezavnost2b.addActionListener(this);
+		
+		tezavnost3b = new JMenuItem("Težka");
+		igraRacunalnikClovek.add(tezavnost3b);
+		tezavnost3b.addActionListener(this);
+		
+		tezavnost = 6;
 
 		//Definiraj igralno polje
 		polje = new IgralnoPolje(this);
@@ -161,13 +177,29 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 	//Glede na to kdo igra proti komu, nastavi karteri igralec je rdeči in katreri je modri.
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == igraClovekRacunalnik) {
-			novaIgra(new Clovek(this, Igralec.RED),
-					  new Racunalnik(this, Igralec.BLUE));
+		if (e.getSource() == tezavnost1) {
+			tezavnost = 1;
+			novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
 		}
-		else if (e.getSource() == igraRacunalnikClovek) {
-			novaIgra(new Racunalnik(this, Igralec.RED),
-					  new Clovek(this, Igralec.BLUE));
+		else if (e.getSource() == tezavnost2) {
+			tezavnost = 3;
+			novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
+		}
+		else if (e.getSource() == tezavnost3) {
+			tezavnost = 6;
+			novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
+		}
+		else if (e.getSource() == tezavnost1b) {
+			tezavnost = 1;
+			novaIgra(new Racunalnik(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
+		}
+		else if (e.getSource() == tezavnost2b) {
+			tezavnost = 3;
+			novaIgra(new Racunalnik(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
+		}
+		else if (e.getSource() == tezavnost3b) {
+			tezavnost = 6;
+			novaIgra(new Racunalnik(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
 		}
 		else if (e.getSource() == igraRacunalnikRacunalnik) {
 			novaIgra(new Racunalnik(this, Igralec.RED),
