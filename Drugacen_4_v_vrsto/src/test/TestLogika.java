@@ -13,10 +13,10 @@ public class TestLogika extends TestCase {
 	public void testIgra() {
 		Igra igra = new Igra();
 
-		// Preveri �e je res na za�etku na vrsti rde�i.
+		// Preveri če je res na začetku na vrsti rdeči.
 		assertEquals(Stanje.NA_VRSTI_RED, igra.stanje());
 
-		// Preveri �e je plo��a res prazna.
+		// Preveri če je plošča res prazna.
 		assertEquals(igra.praznaPlosca(), true);
 		// Na začetku imamo na voljo N * N potez
 		List<Poteza> poteze = igra.poteze();

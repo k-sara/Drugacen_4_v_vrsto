@@ -6,7 +6,7 @@ public class OcenjenaPoteza {
 	
 	/**
 	 * Ocenimo potezo glede na to kako dobra je.
-	 * Lahko je tudi null, Ëe ni nobene moûne poteze veË (npr. na koncu igre). V tem primeru oceni pozicijo.
+	 * Lahko je tudi null, ƒçe ni nobene mo≈æne poteze veƒç (npr. na koncu igre). V tem primeru oceni pozicijo.
 	 */
 	
 	Poteza poteza;

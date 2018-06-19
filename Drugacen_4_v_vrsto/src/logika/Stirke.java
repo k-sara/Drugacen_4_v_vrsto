@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Stirke {
 	
-	/* Stirke so vse moûne zmagovalne kombinacije. 
+	/* Stirke so vse mo≈æne zmagovalne kombinacije. 
 	 * Predstavljene so z dvema tabelama dolzine 4. Prva tabela predstavlja x in druga y koordinate. */
 	
 

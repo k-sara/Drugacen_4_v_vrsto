@@ -1,24 +1,24 @@
 package gui;
 
 /**
- * Objekt, ki zna odigrati potezo. Èlovek ali raèunalnik.
+ * Objekt, ki zna odigrati potezo. Älovek ali raÄunalnik.
  */
 
 public abstract class Strateg {
 
 	/**
-	* Glavno okno klièe to metodo, ko je strateg na potezi.
+	* Glavno okno kliÄe to metodo, ko je strateg na potezi.
 	*/
 	public abstract void na_potezi();
 		
 	/**
-	* Metoda, ki reèe strategu naj preneha igrati.
+	* Metoda, ki reÄe strategu naj preneha igrati.
 	*/
 		
 	public abstract void prenehaj();
 	
 	/**
-	 * Glavno okno klièe to metodo, ko uporabnik klikne na polje (i,j).
+	 * Glavno okno kliÄe to metodo, ko uporabnik klikne na polje (i,j).
 	 */
 	public abstract void klik(int i, int j);
 	

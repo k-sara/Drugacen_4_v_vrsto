@@ -9,20 +9,20 @@ public enum Stanje {
 	
 	private Stirke zmagovalna;
 	
-	/* Nastavi zmagovalno štirko na niè, saj na zaèetku igre nimamo še zmagovalne štirke. */
+	/* Nastavi zmagovalno Å¡tirko na niÄ, saj na zaÄetku igre nimamo Äe zmagovalne Å¡tirke. */
 	
 	private Stanje() {
 		zmagovalna = null;
 	}
 	
-	/* Nastavi zmagovalno štirko. */
+	/* Nastavi zmagovalno Å¡tirko. */
 	
 	public void setZmagovalna (Stirke s) {
 		assert (this == ZMAGA_RED || this == ZMAGA_BLUE);
 		zmagovalna = s;
 	}
 	
-	/* getZmagovalna vrne zmagovalno štirko. */
+	/* getZmagovalna vrne zmagovalno Å¡tirko. */
 	
 	public Stirke getZmagovalna() {
 		return zmagovalna;

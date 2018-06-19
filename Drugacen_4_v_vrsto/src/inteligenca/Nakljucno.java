@@ -20,7 +20,7 @@ public class Nakljucno extends SwingWorker<Poteza, Object> {
 		r = new Random();
 	}
 
-	//Ta metoda se izvede v ozadju in nakljuèno izbere eno potezo iz seznama monih potez.
+	//Ta metoda se izvede v ozadju in nakljuÄno izbere eno potezo iz seznama moÅ¾nih potez.
 	
 	@Override
 	protected Poteza doInBackground() throws Exception {
@@ -31,7 +31,7 @@ public class Nakljucno extends SwingWorker<Poteza, Object> {
 		return poteza;
 	}
 
-	//Ko konèa prejšnja metoda, ta metoda odigra nakljuèno izbrano potezo.
+	//Ko konÄa prejÅ¡nja metoda, ta metoda odigra nakljuÄno izbrano potezo.
 	
 	@Override
 	protected void done() {
