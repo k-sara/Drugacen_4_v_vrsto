@@ -43,18 +43,33 @@ public class Ocena {
 		int vrednostRED = 0;
 		int vrednostBLUE = 0;
 		for (Stirke s : Igra.stirke){
-			int poljaRED = 0;
-			int poljaBLUE = 0;
-			for (int k = 0; k < 4 && (poljaRED == 0 || poljaBLUE == 0); k++) {
-				//Gledamo koliko polj posamezne štirke zaseda posamezen igralec
-				switch (plosca[s.x[k]][s.y[k]]) {
-				case RED: poljaRED += 1; break;
-				case BLUE: poljaBLUE += 1; break;
-				case PRAZNO: break;
+			if (s.x[1] == s.x[2] || s.y[1] == s.y[2]) {
+				int poljaRED = 0;
+				int poljaBLUE = 0;
+				for (int k = 0; k < 4 && (poljaRED == 0 || poljaBLUE == 0); k++) {
+					//Gledamo koliko polj posamezne štirke zaseda posamezen igralec
+					switch (plosca[s.x[k]][s.y[k]]) {
+					case RED: poljaRED += 1; break;
+					case BLUE: poljaBLUE += 1; break;
+					case PRAZNO: break;
+					}
 				}
+				if (poljaRED == 0 && poljaBLUE > 0) { vrednostBLUE += 2*vrednostStirke(poljaBLUE); }
+				if (poljaBLUE == 0 && poljaRED > 0) { vrednostRED += 2*vrednostStirke(poljaRED); }
+			} else {
+				int poljaRED = 0;
+				int poljaBLUE = 0;
+				for (int k = 0; k < 4 && (poljaRED == 0 || poljaBLUE == 0); k++) {
+					//Gledamo koliko polj posamezne štirke zaseda posamezen igralec
+					switch (plosca[s.x[k]][s.y[k]]) {
+					case RED: poljaRED += 1; break;
+					case BLUE: poljaBLUE += 1; break;
+					case PRAZNO: break;
+					}
+				}
+				if (poljaRED == 0 && poljaBLUE > 0) { vrednostBLUE += vrednostStirke(poljaBLUE); }
+				if (poljaBLUE == 0 && poljaRED > 0) { vrednostRED += vrednostStirke(poljaRED); }
 			}
-			if (poljaRED == 0 && poljaBLUE > 0) { vrednostBLUE += vrednostStirke(poljaBLUE); }
-			if (poljaBLUE == 0 && poljaRED > 0) { vrednostRED += vrednostStirke(poljaRED); }
 		}
 		return (jaz == Igralec.BLUE ? vrednostBLUE - vrednostRED : vrednostRED - vrednostBLUE);
 	}
