@@ -189,4 +189,17 @@ public class Igra {
 			return false;
 		}
 	}
+	
+	public int steviloPotez() {
+		int x = 0;
+		for (int i = 0; i < N; i++ ) {
+			for (int j = 0; j < N; j++) {
+				if (plosca[i][j] != Polje.PRAZNO) {
+					x += 1;
+				}
+			}
+		}
+		return x;
+	}
 }
+	

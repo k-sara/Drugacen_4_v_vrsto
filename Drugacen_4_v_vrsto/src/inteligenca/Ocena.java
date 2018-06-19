@@ -17,7 +17,6 @@ public class Ocena {
 	public static final int ZGUBA = -ZMAGA;
 	public static final int NEODLOCENO = 0;
 	
-	
 	//Koliko je vredna stirka, ki ima k zasedenih polj enega igralca 
 	public static int vrednostStirke(int k) {
 		assert (k < 4);

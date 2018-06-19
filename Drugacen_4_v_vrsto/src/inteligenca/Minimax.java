@@ -50,17 +50,18 @@ public class Minimax extends SwingWorker<Poteza, Object>{
 	
 	private OcenjenaPoteza minimax(int k, Igra igra) {
 		Igralec naPotezi = null;
+		int stPotez = igra.steviloPotez();
 		//Ugotovimo kakšno je stanje igre (kdo je na potezi/kdo je zmagal/neodločeno)
 		switch(igra.stanje()) {
 		//Če je na vrsti eden izmed igralcev, igre še ni konec.
 		case NA_VRSTI_RED: naPotezi = Igralec.RED; break;
 		case NA_VRSTI_BLUE: naPotezi = Igralec.BLUE; break;
-		//Če je zmagal eden izmed igralcev, je igre konec, zato ni veš močnih potez. Vrnemo vrednost pozicije.
+		//Če je zmagal eden izmed igralcev, je igre konec, zato ni več možnih potez. Vrnemo vrednost pozicije.
 		case ZMAGA_RED: 
-			return new OcenjenaPoteza(null, (jaz == Igralec.RED ? Ocena.ZMAGA : Ocena.ZGUBA));
+			return new OcenjenaPoteza(null, (jaz == Igralec.RED ? (Ocena.ZMAGA - stPotez) : (Ocena.ZGUBA + stPotez)));
 		case ZMAGA_BLUE: 
-			return new OcenjenaPoteza(null, (jaz == Igralec.BLUE ? Ocena.ZMAGA : Ocena.ZGUBA));
-		//Še je igre konec in je rezultat neodločen, ni več močnih potez. Vrnemo vrednost pozicije.
+			return new OcenjenaPoteza(null, (jaz == Igralec.BLUE ? (Ocena.ZMAGA - stPotez) : (Ocena.ZGUBA + stPotez)));
+		//Če je igre konec in je rezultat neodločen, ni več močnih potez. Vrnemo vrednost pozicije.
 		case NEODLOCENO: 
 			return new OcenjenaPoteza(null, Ocena.NEODLOCENO);
 		}
