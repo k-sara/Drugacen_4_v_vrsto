@@ -19,12 +19,8 @@ public class Racunalnik extends Strateg {
 	
 	@Override
 	public void na_potezi() {
-		if (master.tezavnost == 1) {
-			mislec = new Nakljucno(master);
-		} else {
-			mislec = new Minimax(master, master.tezavnost , jaz);
+		mislec = new Minimax(master, master.tezavnost , jaz);
 			// Zažene swingworkerja
-		}
 		mislec.execute();
 	}
 	
