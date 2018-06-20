@@ -14,9 +14,7 @@ import logika.Poteza;
 public class Minimax extends SwingWorker<Poteza, Object>{
 	
 	private GlavnoOkno master;
-	//Največja možna globina
 	private int globina;
-	//Kdo je rdeči in kdo modri
 	private Igralec jaz;
 
 	public Minimax(GlavnoOkno master, int globina, Igralec jaz) {

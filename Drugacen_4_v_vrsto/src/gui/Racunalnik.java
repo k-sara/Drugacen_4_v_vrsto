@@ -4,6 +4,7 @@ import javax.swing.SwingWorker;
 
 import logika.Igralec;
 import logika.Poteza;
+import inteligenca.AlphaBeta;
 import inteligenca.Minimax;
 import inteligenca.Nakljucno;
 
@@ -19,7 +20,7 @@ public class Racunalnik extends Strateg {
 	
 	@Override
 	public void na_potezi() {
-		mislec = new Minimax(master, master.tezavnost , jaz);
+		mislec = new AlphaBeta(master, master.tezavnost , jaz);
 			// Zažene swingworkerja
 		mislec.execute();
 	}

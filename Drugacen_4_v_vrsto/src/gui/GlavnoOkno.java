@@ -186,7 +186,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
 		}
 		else if (e.getSource() == tezavnost3) {
-			tezavnost = 5;
+			tezavnost = 8;
 			novaIgra(new Clovek(this, Igralec.RED), new Racunalnik(this, Igralec.BLUE));
 		}
 		else if (e.getSource() == tezavnost1b) {
@@ -198,7 +198,7 @@ public class GlavnoOkno extends JFrame implements ActionListener {
 			novaIgra(new Racunalnik(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
 		}
 		else if (e.getSource() == tezavnost3b) {
-			tezavnost = 5;
+			tezavnost = 8;
 			novaIgra(new Racunalnik(this, Igralec.RED), new Clovek(this, Igralec.BLUE));
 		}
 		else if (e.getSource() == igraRacunalnikRacunalnik) {
